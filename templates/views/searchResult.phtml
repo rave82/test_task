@@ -1,0 +1,86 @@
+<?php
+$currPage = (isset($params['pagination']['current_page'])) ? $params['pagination']['current_page'] : 0;
+$perPage = $params['per_page'];
+?>
+
+<div class="wrap-pagination">
+    <?php
+        if(isset($params['pagination'])):
+    ?>
+            <div class="pagination">
+                <?php
+                    if($currPage > 0 && isset($params['pagination']['begin'])):
+                ?>
+                        <a href="<?= $params['pagination']['begin']['link'] ?>" class="item begin">
+                            <<
+                        </a>
+                <?php
+                    endif;
+                ?>
+                <?php
+                    if(isset($params['pagination']['prev'])):
+                ?>
+                        <a href="<?= $params['pagination']['prev']['link'] ?>" class="item end">
+                            <
+                        </a>
+                <?php
+                    endif;
+                ?>
+                <?php
+                    foreach($params['pagination']['items'] as $key=>$value):
+                ?>
+                        <a<?= ($value['active']) ? '' : ' href="'.$value['link'].'"' ?> class="item<?= ($value['active'] ? ' active' : '') ?>">
+                            <?= $value['value'] ?>
+                        </a>
+                <?php
+                    endforeach;
+                ?>
+                <?php
+                    if(isset($params['pagination']['next'])):
+                ?>
+                        <a href="<?= $params['pagination']['next']['link'] ?>" class="item next">
+                            >
+                        </a>
+                        <a href="<?= $params['pagination']['end']['link'] ?>" class="item end">
+                            >>
+                        </a>
+                <?php
+                    endif;
+                ?>
+            </div>
+    <?php
+        endif;
+    ?>
+</div>
+<div class="search-result-items">
+    <?php
+        if(isset($params['items']) && $params['items']):
+            foreach($params['items'] as $key=>$item):
+    ?>
+                <div class="search-result-item">
+                    <div class="product-pos">
+                        <?php
+                            $pos = (($currPage * $perPage) + ($key+1));
+                        ?>
+                    </div>
+                    <div class="product-id">
+                        <span><?= $item['id'] ?></span>
+                    </div>
+                    <div class="product-image">
+                        <img src="<?=$item['photo']?>" alt="<?= $item['name'] ?>"/>
+                    </div>
+                    <div class="product-name">
+                        <span><?= $item['name'] ?></span>
+                    </div>
+                    <div class="product-class">
+                        <span><?= $item['product_class'] ?></span>
+                    </div>
+                    <div class="product-status">
+                        <span><?= $item['status'] ?></span>
+                    </div>
+                </div>
+    <?php
+            endforeach;
+        endif;
+    ?>
+</div>
