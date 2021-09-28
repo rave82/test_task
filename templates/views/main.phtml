@@ -1,0 +1,13 @@
+<div class="block-search">
+    <form action="/search-result/">
+        <div class="line">
+            <input type="text" name="s" value="" class="input" onkeyup="inputSearch(event, this)"/>
+            
+            <button type="submit" class="btn-search" onclick="search(event, this)">Поиск</button>
+        </div>
+        <div class="line-result">
+            <p>Найдено: <span id="countItems" data-count="0">0</span></p>
+        </div>
+    </form>
+</div>
+
